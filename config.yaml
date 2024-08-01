@@ -1,0 +1,215 @@
+# Units for easy adjustability
+units:
+    # Proxy spacing variables
+    # TODO: use uppercase U for slightly bigger?
+    kx: u
+    ky: u
+
+    # Padding variables
+    pad: 3
+    half_x: (cx / 2)
+    half_y: (cy / 2)
+    half_x_padded: half_x + pad
+    half_y_padded: half_y + pad
+    half_x_antipad: half_x - pad
+    half_y_antipad: half_y - pad
+
+# Layout of keyboard
+points:
+    rotate: -15
+    mirror:
+        ref: matrix_innerinner_num
+        distance: 3kx
+    zones:
+        matrix:
+            key:
+                # Propagate any change to the default spacing
+                padding: 1ky
+                spread: 1kx
+            columns:
+                outer:
+                    key:
+                        stagger: 0
+                pinky:
+                    key:
+                        stagger: 0
+                ring:
+                    key:
+                        stagger: 7
+                middle:
+                    key:
+                        stagger: 5
+                index:
+                    key:
+                        stagger: -6
+                inner:
+                    key:
+                        stagger: -3
+                    rows.mod.skip: true
+                innerinner:
+                    key:
+                        stagger: -3
+                    rows.mod.skip: true
+                    rows.bottom.skip: true
+            rows:
+                mod:
+                bottom:
+                home:
+                top:
+                num:
+        thumb:
+            key:
+                # Propagate any change to the default spacing
+                padding: 1ky
+                spread: 1kx
+            anchor:
+                # Anchor on zone "matrix", column "innerinner", row "mod"
+                ref: matrix_inner_mod
+                # TODO: consider this carefully
+                shift: [16, -10]
+            columns:
+                inner:
+                    key:
+                        # Rotate thumb cluster
+                        # TODO: consider this carefully
+                        splay: -20
+                        height: 1.5kx
+                outer:
+                    key.height: 1.5kx
+            rows:
+                first:
+outlines:
+    # Just a rectangle around the keys, for vis
+    keys:
+        - what: rectangle
+          where: true
+          size: [kx, ky]
+    # Left case - mirrored below
+    board_left:
+        - what: polygon
+          operation: stack
+          fillet: 2
+          points:
+            # Start top left, go clockwise
+            - ref: matrix_outer_num
+              shift: [-half_x_padded, half_y_padded]
+            # Go along fingers to guarantee case follows no matter what stagger values are
+            - ref: matrix_outer_num
+              shift: [half_x_antipad, half_y_padded]
+            - ref: matrix_pinky_num
+              shift: [-half_x_padded, half_y_padded]
+            - ref: matrix_pinky_num
+              shift: [half_x_antipad, half_y_padded]
+            - ref: matrix_ring_num
+              shift: [-half_x_padded, half_y_padded]
+            - ref: matrix_ring_num
+              shift: [half_x_antipad, half_y_padded]
+            - ref: matrix_middle_num
+              shift: [-half_x_padded, half_y_padded]
+            - ref: matrix_middle_num
+              shift: [half_x_padded, half_y_padded]
+            - ref: matrix_index_num
+              shift: [-half_x_antipad, half_y_padded]
+            - ref: matrix_index_num
+              shift: [half_x_padded, half_y_padded]
+            # OPTION ONE: have index, inner, and innerinner have a flat line over them
+            - ref: matrix_index_num
+              shift: [2kx + half_x_padded, half_y_padded]
+            # OPTION TWO: have the case follow as closely as possible
+            # - ref: matrix_inner_num
+            #   shift: [-half_x_antipad, half_y_padded]
+            # - ref: matrix_inner_num
+            #   shift: [half_x_padded, half_y_padded]
+            # - ref: matrix_innerinner_num
+            #   shift: [-half_x_antipad, half_y_padded]
+            # - ref: matrix_innerinner_num
+            #   shift: [half_x_padded, half_y_padded]
+            # Down right of where matrix_innerinner_bottom would be
+            - ref: matrix_inner_bottom
+              # x coord: no key at matrix_innerinner_bottom so adjust over by 1 key
+              # y coord: shift down towards thumb cluster minimize profile
+              shift: [half_x_padded + kx, -half_y_padded - pad]
+            - ref: thumb_outer_first
+              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
+              shift: [half_x_padded, 1.5*half_y_padded]
+            - ref: thumb_outer_first
+              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
+              shift: [half_x_padded, -1.5*half_y_padded]
+            - ref: thumb_inner_first
+              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
+              shift: [-half_x_padded, -1.5*half_y_padded]
+            # Down right of matrix_index_mod (incl. pad) that forms a straight line across the bottom of the case.
+            # Use pinky key to guarantee that straight line.
+            - ref: matrix_outer_mod
+              shift: [half_x + 4kx, -half_y_padded]
+            - ref: matrix_outer_mod
+              shift: [-half_x_padded, -half_y_padded]
+
+    # NOTE: to re-produce this after changes to board_left:
+    # 1) copy and replace matrix with mirror_matrix and thumb with mirror_thumb
+    # 2) comments: delete OR flip right/left, clockwise/counterclockwise, etc.
+    # 3) DON'T flip sign of x values in "shift" pairs as this is done w/ the mirror
+    board_right:
+        - what: polygon
+          operation: stack
+          fillet: 2
+          points:
+            # Start top right, go counterclockwise
+            - ref: mirror_matrix_outer_num
+              shift: [-half_x_padded, half_y_padded]
+            # Go along fingers to guarantee case follows no matter what stagger values are
+            - ref: mirror_matrix_outer_num
+              shift: [half_x_antipad, half_y_padded]
+            - ref: mirror_matrix_pinky_num
+              shift: [-half_x_padded, half_y_padded]
+            - ref: mirror_matrix_pinky_num
+              shift: [half_x_antipad, half_y_padded]
+            - ref: mirror_matrix_ring_num
+              shift: [-half_x_padded, half_y_padded]
+            - ref: mirror_matrix_ring_num
+              shift: [half_x_antipad, half_y_padded]
+            - ref: mirror_matrix_middle_num
+              shift: [-half_x_padded, half_y_padded]
+            - ref: mirror_matrix_middle_num
+              shift: [half_x_padded, half_y_padded]
+            - ref: mirror_matrix_index_num
+              shift: [-half_x_antipad, half_y_padded]
+            - ref: mirror_matrix_index_num
+              shift: [half_x_padded, half_y_padded]
+            # OPTION ONE: have index, inner, and innerinner have a flat line over them
+            - ref: mirror_matrix_index_num
+              shift: [2kx + half_x_padded, half_y_padded]
+            # OPTION TWO: have the case follow as closely as possible
+            # - ref: mirror_matrix_inner_num
+            #   shift: [-half_x_antipad, half_y_padded]
+            # - ref: mirror_matrix_inner_num
+            #   shift: [half_x_padded, half_y_padded]
+            # - ref: mirror_matrix_innerinner_num
+            #   shift: [-half_x_antipad, half_y_padded]
+            # - ref: mirror_matrix_innerinner_num
+            #   shift: [half_x_padded, half_y_padded]
+            # Down left of where mirror_matrix_innerinner_bottom would be
+            - ref: mirror_matrix_inner_bottom
+              # x coord: no key at mirror_matrix_innerinner_bottom so adjust over by 1 key
+              # y coord: shift down towards thumb cluster minimize profile
+              shift: [half_x_padded + kx, -half_y_padded - pad]
+            - ref: mirror_thumb_outer_first
+              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
+              shift: [half_x_padded, 1.5*half_y_padded]
+            - ref: mirror_thumb_outer_first
+              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
+              shift: [half_x_padded, -1.5*half_y_padded]
+            - ref: mirror_thumb_inner_first
+              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
+              shift: [-half_x_padded, -1.5*half_y_padded]
+            # Down left of mirror_matrix_index_mod (incl. pad) that forms a straight line across the bottom of the case.
+            # Use pinky key to guarantee that straight line.
+            - ref: mirror_matrix_outer_mod
+              shift: [half_x + 4kx, -half_y_padded]
+            - ref: mirror_matrix_outer_mod
+              shift: [-half_x_padded, -half_y_padded]
+    # See the keys inside of the case
+    keys_in_case:
+        - name: board_left
+        - operation: subtract
+          name: keys
