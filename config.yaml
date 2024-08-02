@@ -60,7 +60,7 @@ points:
                 # Anchor on zone "matrix", column "innerinner", row "mod"
                 ref: matrix_inner_mod
                 # TODO: consider this carefully
-                shift: [14, -10]
+                shift: [16, -11]
             columns:
                 inner:
                     key:
@@ -118,7 +118,7 @@ outlines:
 
             # Down right of matrix_inner_bottom
             - ref: matrix_inner_bottom
-              shift: [half_x_padded, -half_y]
+              shift: [half_x_padded, -half_y + pad]
             - ref: thumb_outer_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [half_x_padded, 1.5*half_y + pad]
@@ -176,9 +176,9 @@ outlines:
             # - ref: mirror_matrix_inner_top
             #   shift: [half_x_padded, half_y_padded]
 
-            # Down right of mirror_matrix_inner_bottom
+            # Down left of mirror_matrix_inner_bottom
             - ref: mirror_matrix_inner_bottom
-              shift: [half_x_padded, -half_y]
+              shift: [half_x_padded, -half_y + pad]
             - ref: mirror_thumb_outer_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [half_x_padded, 1.5*half_y + pad]
