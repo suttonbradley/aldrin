@@ -18,14 +18,14 @@ units:
 points:
     rotate: -15
     mirror:
-        ref: matrix_innerinner_num
-        distance: 3kx
+        ref: matrix_inner_top
+        distance: 4kx
     zones:
         matrix:
             key:
                 # Propagate any change to the default spacing
-                padding: 1ky
-                spread: 1kx
+                padding: ky
+                spread: kx
             columns:
                 outer:
                     key:
@@ -35,7 +35,7 @@ points:
                         stagger: 0
                 ring:
                     key:
-                        stagger: 7
+                        stagger: 8
                 middle:
                     key:
                         stagger: 5
@@ -46,27 +46,21 @@ points:
                     key:
                         stagger: -3
                     rows.mod.skip: true
-                innerinner:
-                    key:
-                        stagger: -3
-                    rows.mod.skip: true
-                    rows.bottom.skip: true
             rows:
                 mod:
                 bottom:
                 home:
                 top:
-                num:
         thumb:
             key:
                 # Propagate any change to the default spacing
-                padding: 1ky
-                spread: 1kx
+                padding: ky
+                spread: kx
             anchor:
                 # Anchor on zone "matrix", column "innerinner", row "mod"
                 ref: matrix_inner_mod
                 # TODO: consider this carefully
-                shift: [16, -10]
+                shift: [14, -10]
             columns:
                 inner:
                     key:
@@ -91,55 +85,51 @@ outlines:
           fillet: 2
           points:
             # Start top left, go clockwise
-            - ref: matrix_outer_num
+            - ref: matrix_outer_top
               shift: [-half_x_padded, half_y_padded]
             # Go along fingers to guarantee case follows no matter what stagger values are
-            - ref: matrix_outer_num
+            - ref: matrix_outer_top
               shift: [half_x_antipad, half_y_padded]
-            - ref: matrix_pinky_num
+            - ref: matrix_pinky_top
               shift: [-half_x_padded, half_y_padded]
-            - ref: matrix_pinky_num
+            - ref: matrix_pinky_top
               shift: [half_x_antipad, half_y_padded]
-            - ref: matrix_ring_num
+            - ref: matrix_ring_top
               shift: [-half_x_padded, half_y_padded]
-            - ref: matrix_ring_num
+            - ref: matrix_ring_top
               shift: [half_x_antipad, half_y_padded]
-            - ref: matrix_middle_num
+            - ref: matrix_middle_top
               shift: [-half_x_padded, half_y_padded]
-            - ref: matrix_middle_num
+            - ref: matrix_middle_top
               shift: [half_x_padded, half_y_padded]
-            - ref: matrix_index_num
+            - ref: matrix_index_top
               shift: [-half_x_antipad, half_y_padded]
-            - ref: matrix_index_num
+            - ref: matrix_index_top
               shift: [half_x_padded, half_y_padded]
-            # OPTION ONE: have index, inner, and innerinner have a flat line over them
-            - ref: matrix_index_num
-              shift: [2kx + half_x_padded, half_y_padded]
+
+            # OPTION ONE: have index and inner have a flat line over them
+            - ref: matrix_index_top
+              shift: [kx + half_x_padded, half_y_padded]
             # OPTION TWO: have the case follow as closely as possible
-            # - ref: matrix_inner_num
+            # - ref: matrix_inner_top
             #   shift: [-half_x_antipad, half_y_padded]
-            # - ref: matrix_inner_num
+            # - ref: matrix_inner_top
             #   shift: [half_x_padded, half_y_padded]
-            # - ref: matrix_innerinner_num
-            #   shift: [-half_x_antipad, half_y_padded]
-            # - ref: matrix_innerinner_num
-            #   shift: [half_x_padded, half_y_padded]
-            # Down right of where matrix_innerinner_bottom would be
+
+            # Down right of matrix_inner_bottom
             - ref: matrix_inner_bottom
-              # x coord: no key at matrix_innerinner_bottom so adjust over by 1 key
-              # y coord: shift down towards thumb cluster minimize profile
-              shift: [half_x_padded + kx, -half_y_padded - pad]
+              shift: [half_x_padded, -half_y]
             - ref: thumb_outer_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
-              shift: [half_x_padded, 1.5*half_y_padded]
+              shift: [half_x_padded, 1.5*half_y + pad]
             - ref: thumb_outer_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
-              shift: [half_x_padded, -1.5*half_y_padded]
+              shift: [half_x_padded, -(1.5*half_y + pad)]
             - ref: thumb_inner_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
-              shift: [-half_x_padded, -1.5*half_y_padded]
-            # Down right of matrix_index_mod (incl. pad) that forms a straight line across the bottom of the case.
-            # Use pinky key to guarantee that straight line.
+              shift: [-half_x_padded, -(1.5*half_y + pad)]
+            # Down right of matrix_index_mod (incl. pad), forms a straight line across the bottom of the case.
+            # Use y position of outer col key to guarantee that straight line.
             - ref: matrix_outer_mod
               shift: [half_x + 4kx, -half_y_padded]
             - ref: matrix_outer_mod
@@ -155,61 +145,57 @@ outlines:
           fillet: 2
           points:
             # Start top right, go counterclockwise
-            - ref: mirror_matrix_outer_num
+            - ref: mirror_matrix_outer_top
               shift: [-half_x_padded, half_y_padded]
             # Go along fingers to guarantee case follows no matter what stagger values are
-            - ref: mirror_matrix_outer_num
+            - ref: mirror_matrix_outer_top
               shift: [half_x_antipad, half_y_padded]
-            - ref: mirror_matrix_pinky_num
+            - ref: mirror_matrix_pinky_top
               shift: [-half_x_padded, half_y_padded]
-            - ref: mirror_matrix_pinky_num
+            - ref: mirror_matrix_pinky_top
               shift: [half_x_antipad, half_y_padded]
-            - ref: mirror_matrix_ring_num
+            - ref: mirror_matrix_ring_top
               shift: [-half_x_padded, half_y_padded]
-            - ref: mirror_matrix_ring_num
+            - ref: mirror_matrix_ring_top
               shift: [half_x_antipad, half_y_padded]
-            - ref: mirror_matrix_middle_num
+            - ref: mirror_matrix_middle_top
               shift: [-half_x_padded, half_y_padded]
-            - ref: mirror_matrix_middle_num
+            - ref: mirror_matrix_middle_top
               shift: [half_x_padded, half_y_padded]
-            - ref: mirror_matrix_index_num
+            - ref: mirror_matrix_index_top
               shift: [-half_x_antipad, half_y_padded]
-            - ref: mirror_matrix_index_num
+            - ref: mirror_matrix_index_top
               shift: [half_x_padded, half_y_padded]
-            # OPTION ONE: have index, inner, and innerinner have a flat line over them
-            - ref: mirror_matrix_index_num
-              shift: [2kx + half_x_padded, half_y_padded]
+
+            # OPTION ONE: have index and inner have a flat line over them
+            - ref: mirror_matrix_index_top
+              shift: [kx + half_x_padded, half_y_padded]
             # OPTION TWO: have the case follow as closely as possible
-            # - ref: mirror_matrix_inner_num
+            # - ref: mirror_matrix_inner_top
             #   shift: [-half_x_antipad, half_y_padded]
-            # - ref: mirror_matrix_inner_num
+            # - ref: mirror_matrix_inner_top
             #   shift: [half_x_padded, half_y_padded]
-            # - ref: mirror_matrix_innerinner_num
-            #   shift: [-half_x_antipad, half_y_padded]
-            # - ref: mirror_matrix_innerinner_num
-            #   shift: [half_x_padded, half_y_padded]
-            # Down left of where mirror_matrix_innerinner_bottom would be
+
+            # Down right of mirror_matrix_inner_bottom
             - ref: mirror_matrix_inner_bottom
-              # x coord: no key at mirror_matrix_innerinner_bottom so adjust over by 1 key
-              # y coord: shift down towards thumb cluster minimize profile
-              shift: [half_x_padded + kx, -half_y_padded - pad]
+              shift: [half_x_padded, -half_y]
             - ref: mirror_thumb_outer_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
-              shift: [half_x_padded, 1.5*half_y_padded]
+              shift: [half_x_padded, 1.5*half_y + pad]
             - ref: mirror_thumb_outer_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
-              shift: [half_x_padded, -1.5*half_y_padded]
+              shift: [half_x_padded, -(1.5*half_y + pad)]
             - ref: mirror_thumb_inner_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
-              shift: [-half_x_padded, -1.5*half_y_padded]
-            # Down left of mirror_matrix_index_mod (incl. pad) that forms a straight line across the bottom of the case.
-            # Use pinky key to guarantee that straight line.
+              shift: [-half_x_padded, -(1.5*half_y + pad)]
+            # Down left of mirror_matrix_index_mod (incl. pad), forms a straight line across the bottom of the case.
+            # Use y position of outer col key to guarantee that straight line.
             - ref: mirror_matrix_outer_mod
               shift: [half_x + 4kx, -half_y_padded]
             - ref: mirror_matrix_outer_mod
               shift: [-half_x_padded, -half_y_padded]
-    # See the keys inside of the case
-    keys_in_case:
+    # Combination preview showing outline and keys.
+    combo:
         - name: board_left
         - operation: subtract
           name: keys
