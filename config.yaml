@@ -60,7 +60,7 @@ points:
                 # Anchor on zone "matrix", column "innerinner", row "mod"
                 ref: matrix_inner_mod
                 # TODO: consider this carefully
-                shift: [14, -11]
+                shift: [14, -12]
             columns:
                 inner:
                     key:
