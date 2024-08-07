@@ -1,5 +1,3 @@
-// COPIED FROM: https://github.com/Giraffasax/SpUnLy58/blob/main/Ergogen/Footprints/nice_nano.js
-
 // Nice!NanoV2
 // Params
 //  orientation: default is down
@@ -31,10 +29,7 @@ module.exports = {
       P100: {type: 'net', value: 'P100'},
       P011: {type: 'net', value: 'P011'},
       P104: {type: 'net', value: 'P104'},
-      P106: {type: 'net', value: 'P106'},
-      P101: {type: 'net', value: 'P101'},
-      P102: {type: 'net', value: 'P102'},
-      P107: {type: 'net', value: 'P107'}
+      P106: {type: 'net', value: 'P106'}
     },
     body: p => {
       const standard = `
@@ -139,10 +134,6 @@ module.exports = {
           (pad 22 thru_hole circle (at -8.89 ${def_pos}7.62) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.SilkS *.Mask) ${p.RST.str})
           (pad 23 thru_hole circle (at -11.43 ${def_pos}7.62) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.SilkS *.Mask) ${p.GND.str})
           (pad 24 thru_hole circle (at -13.97 ${def_pos}7.62) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.SilkS *.Mask) ${p.RAW.str})
-
-          (pad 31 thru_hole circle (at 8.89 5.08) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.SilkS *.Mask) ${p.P101.str})
-          (pad 32 thru_hole circle (at 8.89 2.54) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.SilkS *.Mask) ${p.P102.str})
-          (pad 33 thru_hole circle (at 8.89 0) (size 1.7526 1.7526) (drill 1.0922) (layers *.Cu *.SilkS *.Mask) ${p.P107.str})
           `
         }
         if(p.orientation == 'down') {
