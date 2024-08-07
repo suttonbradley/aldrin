@@ -51,6 +51,9 @@ points:
                 bottom:
                 home:
                 top:
+            anchor:
+                # Shift PCB into KiCAD frame
+                shift: [100, -150]
         thumb:
             key:
                 # Propagate any change to the default spacing
@@ -70,8 +73,9 @@ points:
                         height: 1.5kx
                 outer:
                     key.height: 1.5kx
-            rows:
-                first:
+            rows.first:
+
+# Case outlines
 outlines:
     # Just a rectangle around the keys, for vis
     keys:
@@ -106,19 +110,11 @@ outlines:
               shift: [-half_x_antipad, half_y_padded]
             - ref: matrix_index_top
               shift: [half_x_padded, half_y_padded]
-
-            # OPTION ONE: have index and inner have a flat line over them
             - ref: matrix_index_top
               shift: [kx + half_x_padded, half_y_padded]
-            # OPTION TWO: have the case follow as closely as possible
-            # - ref: matrix_inner_top
-            #   shift: [-half_x_antipad, half_y_padded]
-            # - ref: matrix_inner_top
-            #   shift: [half_x_padded, half_y_padded]
-
             # Down right of matrix_inner_bottom
             - ref: matrix_inner_bottom
-              shift: [half_x_padded, -half_y + pad]
+              shift: [half_x_padded, -half_y_padded]
             - ref: thumb_outer_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [half_x_padded, 1.5*half_y + pad]
@@ -166,19 +162,11 @@ outlines:
               shift: [-half_x_antipad, half_y_padded]
             - ref: mirror_matrix_index_top
               shift: [half_x_padded, half_y_padded]
-
-            # OPTION ONE: have index and inner have a flat line over them
             - ref: mirror_matrix_index_top
               shift: [kx + half_x_padded, half_y_padded]
-            # OPTION TWO: have the case follow as closely as possible
-            # - ref: mirror_matrix_inner_top
-            #   shift: [-half_x_antipad, half_y_padded]
-            # - ref: mirror_matrix_inner_top
-            #   shift: [half_x_padded, half_y_padded]
-
             # Down left of mirror_matrix_inner_bottom
             - ref: mirror_matrix_inner_bottom
-              shift: [half_x_padded, -half_y + pad]
+              shift: [half_x_padded, -half_y_padded]
             - ref: mirror_thumb_outer_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [half_x_padded, 1.5*half_y + pad]
@@ -199,3 +187,39 @@ outlines:
         - name: board_left
         - operation: subtract
           name: keys
+
+pcbs:
+    left:
+        outlines:
+            main:
+                outline: board_left
+            keycaps:
+                outline: keys
+        footprints:
+            mx_hotswap:
+                what: mx
+                # Just left side, no mirror
+                where: /^(thumb|matrix)_.*/
+                params:
+                    keycaps: true
+                    reverse: false
+                    hotswap: true
+                    from: "{{column_net}}"
+                    to: "{{colrow}}"
+                adjust:
+                    # TODO: keep from caldera?
+                    rotate: 180
+            nice_nano:
+                what: nice_nano
+                params.orientation: up
+                where:
+                    ref: matrix_inner_top
+            diode_main:
+                what: diode
+                # TODO: like caldera, move some diodes for mounting holes?
+                where: /^(thumb|matrix)_.*/
+                params:
+                    from: "{{colrow}}"
+                    to: "{{row_net}}"
+                adjust:
+                    shift: [-1.9, 5.65]
