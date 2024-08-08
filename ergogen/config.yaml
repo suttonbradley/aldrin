@@ -53,7 +53,7 @@ points:
                 top.row_net: P031
             anchor:
                 # Shift PCB into KiCAD frame
-                shift: [100, -150]
+                shift: [50, -150]
         thumb:
             key:
                 # Propagate any change to the default spacing
@@ -231,7 +231,6 @@ pcbs:
             # Keys
             mx_hotswap:
                 what: mx
-                # Just left side, no mirror
                 where: /^(thumb|matrix)_.*/
                 params:
                     keycaps: true
@@ -252,7 +251,7 @@ pcbs:
                     # standard usb-c connector sticks out by about 1/16in. or 1.59mm from the nice!nano
                     # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
                     # should end up about .5mm inside of the PCB outline. 
-                    # Make sure in kicad that the port ends up just left of the edge of the PCB
+                    # Make sure in kicad that the port ends up just inside the edge of the PCB
                     shift: [-8.4, -1]
             # ----- Diodes -----
             diode_main:
@@ -337,4 +336,118 @@ pcbs:
                 what: mountinghole
                 where:
                     ref: matrix_ring_home
+                    shift: [half_x, -half_y]
+    right:
+        outlines:
+            main:
+                outline: board_right
+        footprints:
+            # Keys
+            mx_hotswap:
+                what: mx
+                where: /^(mirror_thumb|mirror_matrix)_.*/
+                params:
+                    keycaps: true
+                    reverse: false
+                    hotswap: true
+                    from: "{{column_net}}"
+                    to: "{{colrow}}"
+                adjust:
+                    rotate: 180
+            # Controller
+            nice_nano:
+                what: nice_nano
+                params.orientation: up
+                where:
+                    ref: mirror_matrix_inner_top
+                    rotate: -180
+                    # usb-c connector is 6.65mm deep, so line it up on the edge of the board to stick out only a little
+                    # standard usb-c connector sticks out by about 1/16in. or 1.59mm from the nice!nano
+                    # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
+                    # should end up about .5mm inside of the PCB outline. 
+                    # Make sure in kicad that the port ends up just inside the edge of the PCB
+                    shift: [-8.4, -1]
+            # ----- Diodes -----
+            diode_main:
+                what: diode
+                # TODO: move some diodes for special positioning/interference of mounting holes, n!n, etc.
+                # Standard diodes on all except those listed in the nested parens
+                where:
+                    - /^mirror_matrix_(?!(?:index_top)).*/
+                    - /^mirror_thumb_*/
+                params:
+                    from: "{{colrow}}"
+                    to: "{{row_net}}"
+                adjust:
+                    shift: [-1.9, 4]
+            diode_nice_nano_1:
+                what: diode
+                where: mirror_matrix_index_top
+                params:
+                    from: "{{colrow}}"
+                    to: "{{row_net}}"
+                adjust:
+                    shift: [-1.9, 7.2]
+            # Battery jack
+            # Used this battery: https://www.amazon.com/dp/B09726K2LC which is approx 2.28*1.42*0.24 inches
+            # There's a short cable on top of that for flexibility
+            jstph:
+                what: jstph
+                where:
+                    ref: mirror_matrix_middle_bottom
+                    shift: [0, 9]
+                    rotate: 90
+                params:
+                    side: B
+                    pos: pos
+                    neg: GND
+            # Reset switch (horizontal community version)
+            horizontal_reset:
+                what: EVQPUC
+                params: 
+                    side: B
+                    from: GND
+                    to: RST 
+                where:
+                    ref: mirror_matrix_inner_home
+                    # Make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
+                    shift: [9.5, 4.3]
+                    rotate: -90.0
+            # Battery on/off switch
+            battery_switch:
+                what: slider
+                where:
+                    ref: mirror_matrix_inner_bottom
+                    # Make sure in kicad that the edge ends up about 1.3mm off the edge of the board (for case)
+                    shift: [9.4, 7]
+                    rotate: -90
+                params:
+                    side: B
+                    from: pos
+                    to: RAW
+            # Mounting holes
+            hole_bottom_right:
+                what: mountinghole
+                where:
+                    ref: mirror_matrix_index_bottom
+                    shift: [-half_x, -half_y]
+            hole_bottom_left:
+                what: mountinghole
+                where:
+                    ref: mirror_matrix_outer_bottom
+                    shift: [half_x, -half_y]
+            hole_top_left:
+                what: mountinghole
+                where:
+                    ref: mirror_matrix_outer_top
+                    shift: [half_x, -half_y]
+            hole_top_right:
+                what: mountinghole
+                where:
+                    ref: mirror_matrix_middle_top
+                    shift: [half_x, -half_y]
+            hole_middle_bottom:
+                what: mountinghole
+                where:
+                    ref: mirror_matrix_ring_home
                     shift: [half_x, -half_y]
