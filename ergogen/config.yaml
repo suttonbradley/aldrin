@@ -113,11 +113,24 @@ outlines:
             - ref: thumb_inner_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [-half_x_padded, -(1.5*half_y + pad)]
-            # TODO: might want to erase straight line here, just for the flexibility of making the case form-fitted
-            # Down right of matrix_index_mod (incl. pad), forms a straight line across the bottom of the case.
-            # Use y position of outer col key to guarantee that straight line.
+            - ref: matrix_index_mod
+              shift: [half_x, -half_y_padded]
+            - ref: matrix_index_mod
+              shift: [-half_x_padded, -half_y_padded]
+            - ref: matrix_middle_mod
+              shift: [half_x_antipad, -half_y_padded]
+            - ref: matrix_middle_mod
+              shift: [-half_x_antipad, -half_y_padded]
+            - ref: matrix_ring_mod
+              shift: [half_x_padded, -half_y_padded]
+            - ref: matrix_ring_mod
+              shift: [-half_x_antipad, -half_y_padded]
+            - ref: matrix_pinky_mod
+              shift: [half_x_padded, -half_y_padded]
+            - ref: matrix_pinky_mod
+              shift: [-half_x_antipad, -half_y_padded]
             - ref: matrix_outer_mod
-              shift: [half_x + 4kx, -half_y_padded]
+              shift: [half_x_padded, -half_y_padded]
             - ref: matrix_outer_mod
               shift: [-half_x_padded, -half_y_padded]
 
@@ -166,10 +179,24 @@ outlines:
             - ref: mirror_thumb_inner_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [-half_x_padded, -(1.5*half_y + pad)]
-            # Down left of mirror_matrix_index_mod (incl. pad), forms a straight line across the bottom of the case.
-            # Use y position of outer col key to guarantee that straight line.
+            - ref: mirror_matrix_index_mod
+              shift: [half_x, -half_y_padded]
+            - ref: mirror_matrix_index_mod
+              shift: [-half_x_padded, -half_y_padded]
+            - ref: mirror_matrix_middle_mod
+              shift: [half_x_antipad, -half_y_padded]
+            - ref: mirror_matrix_middle_mod
+              shift: [-half_x_antipad, -half_y_padded]
+            - ref: mirror_matrix_ring_mod
+              shift: [half_x_padded, -half_y_padded]
+            - ref: mirror_matrix_ring_mod
+              shift: [-half_x_antipad, -half_y_padded]
+            - ref: mirror_matrix_pinky_mod
+              shift: [half_x_padded, -half_y_padded]
+            - ref: mirror_matrix_pinky_mod
+              shift: [-half_x_antipad, -half_y_padded]
             - ref: mirror_matrix_outer_mod
-              shift: [half_x + 4kx, -half_y_padded]
+              shift: [half_x_padded, -half_y_padded]
             - ref: mirror_matrix_outer_mod
               shift: [-half_x_padded, -half_y_padded]
     # Combination preview showing outline and keys.
