@@ -2,8 +2,8 @@
 units:
     # Proxy spacing variables
     # TODO: use uppercase U for slightly bigger?
-    kx: U
-    ky: U
+    kx: U + .35
+    ky: U + .35
 
     # Padding variables
     pad: 2
@@ -209,7 +209,7 @@ pcbs:
                     # standard usb-c connector sticks out by about 1/16in. or 1.59mm from the nice!nano
                     # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
                     # should end up just barely around 
-                    shift: [-8.1, -.8]
+                    shift: [-7.9, -.8]
             # ----- Diodes -----
             diode_main:
                 what: diode
@@ -257,14 +257,14 @@ pcbs:
                     to: RST 
                 where:
                     ref: matrix_inner_home
-                    shift: [9.4, 4.3]
+                    shift: [9.5, 4.3]
                     rotate: -90.0
             # Battery on/off switch
             battery_switch:
                 what: slider
                 where:
                     ref: matrix_inner_bottom
-                    shift: [9.3, 7]
+                    shift: [9, 7]
                     rotate: -90
                 params:
                     side: B
