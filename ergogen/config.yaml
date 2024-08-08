@@ -2,13 +2,13 @@
 units:
     # Proxy spacing variables
     # TODO: use uppercase U for slightly bigger?
-    kx: u
-    ky: u
+    kx: U
+    ky: U
 
     # Padding variables
-    pad: 3
-    half_x: (cx / 2)
-    half_y: (cy / 2)
+    pad: 2
+    half_x: (kx / 2)
+    half_y: (ky / 2)
     half_x_padded: half_x + pad
     half_y_padded: half_y + pad
     half_x_antipad: half_x - pad
@@ -16,10 +16,9 @@ units:
 
 # Layout of keyboard
 points:
-    rotate: -15
     mirror:
         ref: matrix_inner_top
-        distance: 4kx
+        distance: 6kx
     zones:
         matrix:
             key:
@@ -27,21 +26,11 @@ points:
                 padding: ky
                 spread: kx
             columns:
-                outer:
-                    key:
-                        stagger: 0
-                pinky:
-                    key:
-                        stagger: 0
-                ring:
-                    key:
-                        stagger: 8
-                middle:
-                    key:
-                        stagger: 5
-                index:
-                    key:
-                        stagger: -6
+                outer.key.stagger: 0
+                pinky.key.stagger: 0
+                ring.key.stagger: 8
+                middle.key.stagger: 5
+                index.key.stagger: -7
                 inner:
                     key:
                         stagger: -3
@@ -75,7 +64,7 @@ points:
                     key.height: 1.5kx
             rows.first:
 
-# Case outlines
+# PCB outlines
 outlines:
     # Just a rectangle around the keys, for vis
     keys:
@@ -124,6 +113,7 @@ outlines:
             - ref: thumb_inner_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [-half_x_padded, -(1.5*half_y + pad)]
+            # TODO: might want to erase straight line here, just for the flexibility of making the case form-fitted
             # Down right of matrix_index_mod (incl. pad), forms a straight line across the bottom of the case.
             # Use y position of outer col key to guarantee that straight line.
             - ref: matrix_outer_mod
@@ -193,9 +183,8 @@ pcbs:
         outlines:
             main:
                 outline: board_left
-            keycaps:
-                outline: keys
         footprints:
+            # Keys
             mx_hotswap:
                 what: mx
                 # Just left side, no mirror
@@ -204,22 +193,106 @@ pcbs:
                     keycaps: true
                     reverse: false
                     hotswap: true
+                    # TODO:
                     from: "{{column_net}}"
                     to: "{{colrow}}"
                 adjust:
-                    # TODO: keep from caldera?
                     rotate: 180
+            # Controller
             nice_nano:
                 what: nice_nano
                 params.orientation: up
                 where:
                     ref: matrix_inner_top
+                    rotate: -180
+                    # usb-c connector is 6.65mm deep, so line it up on the edge of the board to stick out only a little
+                    # standard usb-c connector sticks out by about 1/16in. or 1.59mm from the nice!nano
+                    # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
+                    # should end up just barely around 
+                    shift: [-8.1, -.8]
+            # ----- Diodes -----
             diode_main:
                 what: diode
-                # TODO: like caldera, move some diodes for mounting holes?
-                where: /^(thumb|matrix)_.*/
+                # TODO: move some diodes for special positioning/interference of mounting holes, n!n, etc.
+                # Standard diodes on all except those listed in the nested parens
+                where:
+                    - /^matrix_(?!(?:index_top)).*/
+                    - /^thumb_*/
                 params:
+                    # TODO:
                     from: "{{colrow}}"
                     to: "{{row_net}}"
                 adjust:
-                    shift: [-1.9, 5.65]
+                    shift: [-1.9, 4]
+            diode_nice_nano_1:
+                what: diode
+                where: matrix_index_top
+                params:
+                    # TODO:
+                    from: "{{colrow}}"
+                    to: "{{row_net}}"
+                adjust:
+                    shift: [-1.9, 7.2]
+            # Battery jack
+            # Used this battery: https://www.amazon.com/dp/B09726K2LC which is approx 2.28*1.42*0.24 inches
+            # There's a short cable on top of that for flexibility
+            jstph:
+                what: jstph
+                where:
+                    ref: matrix_middle_bottom
+                    shift: [0, 9]
+                    rotate: 90
+                params:
+                    # TODO: ?
+                    side: B
+                    pos: pos
+                    neg: GND
+            # Reset switch (horizontal community version)
+            horizontal_reset:
+                what: EVQPUC
+                params: 
+                    # TODO: ?
+                    side: B
+                    from: GND
+                    to: RST 
+                where:
+                    ref: matrix_inner_home
+                    shift: [9.4, 4.3]
+                    rotate: -90.0
+            # Battery on/off switch
+            battery_switch:
+                what: slider
+                where:
+                    ref: matrix_inner_bottom
+                    shift: [9.3, 7]
+                    rotate: -90
+                params:
+                    side: B
+                    from: pos
+                    to: RAW
+            # Mounting holes
+            hole_bottom_right:
+                what: mountinghole
+                where:
+                    ref: matrix_index_bottom
+                    shift: [-half_x, -half_y]
+            hole_bottom_left:
+                what: mountinghole
+                where:
+                    ref: matrix_outer_bottom
+                    shift: [half_x, -half_y]
+            hole_top_left:
+                what: mountinghole
+                where:
+                    ref: matrix_outer_top
+                    shift: [half_x, -half_y]
+            hole_top_right:
+                what: mountinghole
+                where:
+                    ref: matrix_middle_top
+                    shift: [half_x, -half_y]
+            hole_middle_bottom:
+                what: mountinghole
+                where:
+                    ref: matrix_ring_home
+                    shift: [half_x, -half_y]
