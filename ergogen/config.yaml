@@ -291,7 +291,7 @@ pcbs:
                 what: slider
                 where:
                     ref: matrix_inner_bottom
-                    shift: [9, 7]
+                    shift: [8.9, 7]
                     rotate: -90
                 params:
                     side: B
