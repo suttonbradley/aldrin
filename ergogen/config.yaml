@@ -103,7 +103,7 @@ outlines:
               shift: [kx + half_x_padded, half_y_padded]
             # Down right of matrix_inner_bottom
             - ref: matrix_inner_bottom
-              shift: [half_x_padded, -half_y_padded]
+              shift: [half_x_padded, -half_y_padded - 1]
             - ref: thumb_outer_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [half_x_padded, 1.5*half_y + pad]
@@ -169,7 +169,7 @@ outlines:
               shift: [kx + half_x_padded, half_y_padded]
             # Down left of mirror_matrix_inner_bottom
             - ref: mirror_matrix_inner_bottom
-              shift: [half_x_padded, -half_y_padded]
+              shift: [half_x_padded, -half_y_padded - 1]
             - ref: mirror_thumb_outer_first
               # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [half_x_padded, 1.5*half_y + pad]
@@ -220,7 +220,6 @@ pcbs:
                     keycaps: true
                     reverse: false
                     hotswap: true
-                    # TODO:
                     from: "{{column_net}}"
                     to: "{{colrow}}"
                 adjust:
@@ -235,8 +234,9 @@ pcbs:
                     # usb-c connector is 6.65mm deep, so line it up on the edge of the board to stick out only a little
                     # standard usb-c connector sticks out by about 1/16in. or 1.59mm from the nice!nano
                     # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
-                    # should end up just barely around 
-                    shift: [-7.9, -.8]
+                    # should end up just barely left of the edge of the PCB. 
+                    # TODO: make sure in kicad that the port ends up just left of the edge of the PCB
+                    shift: [-7.9, -1]
             # ----- Diodes -----
             diode_main:
                 what: diode
@@ -246,7 +246,6 @@ pcbs:
                     - /^matrix_(?!(?:index_top)).*/
                     - /^thumb_*/
                 params:
-                    # TODO:
                     from: "{{colrow}}"
                     to: "{{row_net}}"
                 adjust:
@@ -255,7 +254,6 @@ pcbs:
                 what: diode
                 where: matrix_index_top
                 params:
-                    # TODO:
                     from: "{{colrow}}"
                     to: "{{row_net}}"
                 adjust:
@@ -284,6 +282,7 @@ pcbs:
                     to: RST 
                 where:
                     ref: matrix_inner_home
+                    # TODO: make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
                     shift: [9.5, 4.3]
                     rotate: -90.0
             # Battery on/off switch
@@ -291,6 +290,7 @@ pcbs:
                 what: slider
                 where:
                     ref: matrix_inner_bottom
+                    # TODO: make sure in kicad that the edge ends up about 1.2mm off the edge of the board (for case)
                     shift: [8.9, 7]
                     rotate: -90
                 params:
