@@ -44,13 +44,13 @@ points:
                 inner:
                     key:
                         stagger: -3
-                        column_net: P011
+                        column_net: P008
                     rows.mod.skip: true
             rows:
-                mod.row_net: P115
-                bottom.row_net: P002
-                home.row_net: P029
-                top.row_net: P031
+                mod.row_net: P113
+                bottom.row_net: P111
+                home.row_net: P010
+                top.row_net: P009
             anchor:
                 # Shift PCB into KiCAD frame
                 shift: [50, -150]
@@ -77,9 +77,9 @@ points:
                     key:
                         height: 1.5U
                         # Puts the outer key in a new col by itself
-                        column_net: P008
+                        column_net: P006
             # Puts both keys in matrix's mod row
-            rows.first.row_net: P115
+            rows.first.row_net: P113
 
 # PCB outlines
 outlines:
@@ -305,7 +305,7 @@ pcbs:
                 where:
                     ref: matrix_inner_bottom
                     # Make sure in kicad that the edge ends up about 1.3mm off the edge of the board (for case)
-                    shift: [9.2, 7]
+                    shift: [9, 7]
                     rotate: -90
                 params:
                     side: B
@@ -360,13 +360,12 @@ pcbs:
                 params.orientation: up
                 where:
                     ref: mirror_matrix_inner_top
-                    rotate: -180
                     # usb-c connector is 6.65mm deep, so line it up on the edge of the board to stick out only a little
                     # standard usb-c connector sticks out by about 1/16in. or 1.59mm from the nice!nano
                     # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
                     # should end up about .5mm inside of the PCB outline. 
                     # Make sure in kicad that the port ends up just inside the edge of the PCB
-                    shift: [-8.4, -1]
+                    shift: [-7.8, -1]
             # ----- Diodes -----
             diode_main:
                 what: diode
@@ -411,7 +410,7 @@ pcbs:
                 where:
                     ref: mirror_matrix_inner_home
                     # Make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
-                    shift: [9.5, 4.3]
+                    shift: [9.8, 4.3]
                     rotate: -90.0
             # Battery on/off switch
             battery_switch:
@@ -419,7 +418,7 @@ pcbs:
                 where:
                     ref: mirror_matrix_inner_bottom
                     # Make sure in kicad that the edge ends up about 1.3mm off the edge of the board (for case)
-                    shift: [9.4, 7]
+                    shift: [9, 7]
                     rotate: -90
                 params:
                     side: B
