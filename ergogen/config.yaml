@@ -2,8 +2,8 @@
 units:
     # Proxy spacing variables
     # TODO: use uppercase U for slightly bigger?
-    kx: U + .5
-    ky: U + .5
+    kx: U + 1
+    ky: U + 1
 
     # Padding variables
     pad: 2
@@ -252,7 +252,7 @@ pcbs:
                     # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
                     # should end up about .5mm inside of the PCB outline. 
                     # Make sure in kicad that the port ends up just inside the edge of the PCB
-                    shift: [-8.4, -1]
+                    shift: [-7.8, -1]
             # ----- Diodes -----
             diode_main:
                 what: diode
@@ -297,7 +297,7 @@ pcbs:
                 where:
                     ref: matrix_inner_home
                     # Make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
-                    shift: [9.5, 4.3]
+                    shift: [9.8, 4.3]
                     rotate: -90.0
             # Battery on/off switch
             battery_switch:
@@ -305,7 +305,7 @@ pcbs:
                 where:
                     ref: matrix_inner_bottom
                     # Make sure in kicad that the edge ends up about 1.3mm off the edge of the board (for case)
-                    shift: [9.4, 7]
+                    shift: [9.2, 7]
                     rotate: -90
                 params:
                     side: B
