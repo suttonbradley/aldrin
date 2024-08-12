@@ -1,10 +1,11 @@
 # Ignore except explicitly-listed
 /*
+
 !.gitignore
-
-# Ergogen
 !ergogen
-ergogen/output*
-ergogen/config-caldera.yaml
-
+!ergogen-output
 !README.md
+!artwork
+
+# Re-ignore
+**/*.zip
