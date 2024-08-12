@@ -72,7 +72,7 @@ points:
                         splay: -20
                         height: 1.5U
                         # Puts the inner key in matrix's inner col 
-                        column_net: P011
+                        column_net: P008
                 outer:
                     key:
                         height: 1.5U
