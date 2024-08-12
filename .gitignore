@@ -6,6 +6,7 @@
 !ergogen-output
 !README.md
 !artwork
+!zmk-config
 
 # Re-ignore
 **/*.zip
