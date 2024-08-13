@@ -331,7 +331,7 @@ pcbs:
                 what: mountinghole
                 where:
                     ref: matrix_middle_top
-                    shift: [half_x, -half_y]
+                    shift: [half_x - 1.595, -half_y]
             hole_middle_bottom:
                 what: mountinghole
                 where:
@@ -444,7 +444,7 @@ pcbs:
                 what: mountinghole
                 where:
                     ref: mirror_matrix_middle_top
-                    shift: [half_x, -half_y]
+                    shift: [half_x - 1.595, -half_y]
             hole_middle_bottom:
                 what: mountinghole
                 where:
