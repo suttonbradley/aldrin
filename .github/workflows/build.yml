@@ -2,7 +2,7 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    uses: suttonbradley/zmk/.github/workflows/build-user-config.yml@alt-build-locations
     with:
       build_matrix_path: zmk-config/build.yaml
       config_path: zmk-config/config
