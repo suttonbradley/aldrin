@@ -9,3 +9,5 @@
 
 # Re-ignore
 **/*.zip
+**/*.lck
+**/.DS_Store

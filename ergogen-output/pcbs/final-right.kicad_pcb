@@ -6701,78 +6701,6 @@
 			(uuid "fd993044-4160-4d88-a098-4723a6d3d060")
 		)
 	)
-	(footprint "HOLE_M2_TH"
-		(layer "F.Cu")
-		(uuid "8484fb77-3398-4d45-93ef-2fa4d0961ac1")
-		(at 300.625 86.875)
-		(property "Reference" ""
-			(at 0 0 0)
-			(layer "F.SilkS")
-			(uuid "f2041a0a-9e73-475b-bcf5-6785937d9ee6")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(uuid "9a444679-36d6-4ec5-ba3f-56384983645c")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "359de302-a065-4d7e-be5b-c3c9e058dcac")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "6699cbb7-a043-4d80-a69a-3f6cf5a46177")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "af24959f-a257-4fc7-b1ea-5bf68547d56a")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(attr through_hole)
-		(pad "" np_thru_hole circle
-			(at 0 0 90)
-			(size 4 4)
-			(drill 4)
-			(layers "*.Cu" "*.Mask" "F.SilkS")
-			(clearance 0.3)
-			(uuid "bb81cb64-d09e-431b-8a91-1446d8e61a54")
-		)
-	)
 	(footprint "ComboDiode"
 		(layer "F.Cu")
 		(uuid "849e8bbe-8e2b-4419-b0f1-da7427badf4c")
@@ -18246,16 +18174,6 @@
 		(layer "Edge.Cuts")
 		(uuid "b6ed6eca-e0e6-4b4f-a441-099c63698e89")
 	)
-	(gr_line
-		(start 362.775 77.825)
-		(end 362.775 77.825)
-		(stroke
-			(width 0.15)
-			(type solid)
-		)
-		(layer "Edge.Cuts")
-		(uuid "bef8e8d6-dd15-4e3e-869d-d927b2b94260")
-	)
 	(gr_arc
 		(start 234.115912 185.296269)
 		(mid 232.586635 185.229499)
@@ -18297,16 +18215,6 @@
 		)
 		(layer "Edge.Cuts")
 		(uuid "c38ab5cd-b93e-442d-9323-4da88761b17b")
-	)
-	(gr_line
-		(start 358.775 162.025)
-		(end 358.775 162.025)
-		(stroke
-			(width 0.15)
-			(type solid)
-		)
-		(layer "Edge.Cuts")
-		(uuid "cf4e681b-a9ba-4e78-bffd-3d3ca3c8bf33")
 	)
 	(gr_line
 		(start 322.675 67.825)
