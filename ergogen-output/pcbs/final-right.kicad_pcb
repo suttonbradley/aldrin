@@ -5526,6 +5526,78 @@
 			(uuid "70e55b2f-becb-4c79-9fb1-486af67d2c2a")
 		)
 	)
+	(footprint "HOLE_M2_TH"
+		(layer "F.Cu")
+		(uuid "5ed3dd4b-bacf-48b1-8898-497ca18bcc6e")
+		(at 301.752 86.868)
+		(property "Reference" ""
+			(at 0 0 0)
+			(layer "F.SilkS")
+			(uuid "108e06af-fe29-402c-b00a-76f56724692e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(uuid "b932db50-39b9-40a6-9bab-71f0bccea7d6")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1446864c-02d9-43d2-a23b-94005558602c")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "87ed7565-4ebf-4bef-99d4-edc17072c483")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "96b8e2bd-20e7-4afd-b256-72deb7241abd")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(attr through_hole)
+		(pad "" np_thru_hole circle
+			(at 0 0 90)
+			(size 4 4)
+			(drill 4)
+			(layers "F&B.Cu" "*.Mask" "F.SilkS")
+			(clearance 0.3)
+			(uuid "7aad7fe6-f502-4480-97e6-0ba3c6927efd")
+		)
+	)
 	(footprint "MX"
 		(layer "F.Cu")
 		(uuid "646b9200-5f64-40d3-a9d7-eed86504391b")
