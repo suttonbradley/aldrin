@@ -1,441 +1,441 @@
 # Units for easy adjustability
 units:
-    # Proxy spacing variables
-    kx: U + 1
-    ky: U + 1
+  # Proxy spacing variables
+  kx: U + 1
+  ky: U + 1
 
-    # Padding variables
-    pad: 2
-    half_x: (kx / 2)
-    half_y: (ky / 2)
-    half_x_padded: half_x + pad
-    half_y_padded: half_y + pad
-    half_x_antipad: half_x - pad
-    half_y_antipad: half_y - pad
+  # Padding variables
+  pad: 2
+  half_x: (kx / 2)
+  half_y: (ky / 2)
+  half_x_padded: half_x + pad
+  half_y_padded: half_y + pad
+  half_x_antipad: half_x - pad
+  half_y_antipad: half_y - pad
 
 # Layout of keyboard
 points:
-    mirror:
-        ref: matrix_inner_top
-        distance: 6kx
-    zones:
-        matrix:
-            key:
-                # Propagate any change to the default spacing
-                padding: ky
-                spread: kx
-            columns:
-                outer.key:
-                    stagger: 0
-                    column_net: P017
-                pinky.key:
-                    stagger: 0
-                    column_net: P020
-                ring.key:
-                    stagger: 8
-                    column_net: P022
-                middle.key:
-                    stagger: 5
-                    column_net: P024
-                index.key:
-                    stagger: -7
-                    column_net: P100
-                inner:
-                    key:
-                        stagger: -3
-                        column_net: P008
-                    rows.mod.skip: true
-            rows:
-                mod.row_net: P113
-                bottom.row_net: P111
-                home.row_net: P010
-                top.row_net: P009
-            anchor:
-                # Shift PCB into KiCAD frame
-                shift: [50, -150]
-        thumb:
-            key:
-                # Propagate any change to the default spacing
-                padding: ky
-                spread: kx
-            anchor:
-                # Anchor on zone "matrix", column "innerinner", row "mod"
-                ref: matrix_inner_mod
-                shift: [14, -12]
-            columns:
-                inner:
-                    key:
-                        # Rotate thumb cluster
-                        splay: -20
-                        height: 1.5U
-                        # Puts the inner key in matrix's inner col 
-                        column_net: P008
-                outer:
-                    key:
-                        height: 1.5U
-                        # Puts the outer key in a new col by itself
-                        column_net: P006
-            # Puts both keys in matrix's mod row
-            rows.first.row_net: P113
+  mirror:
+    ref: matrix_inner_top
+    distance: 6kx
+  zones:
+    matrix:
+      key:
+        # Propagate any change to the default spacing
+        padding: ky
+        spread: kx
+      columns:
+        outer.key:
+          stagger: 0
+          column_net: P017
+        pinky.key:
+          stagger: 0
+          column_net: P020
+        ring.key:
+          stagger: 8
+          column_net: P022
+        middle.key:
+          stagger: 5
+          column_net: P024
+        index.key:
+          stagger: -7
+          column_net: P100
+        inner:
+          key:
+            stagger: -3
+            column_net: P008
+          rows.mod.skip: true
+      rows:
+        mod.row_net: P113
+        bottom.row_net: P111
+        home.row_net: P010
+        top.row_net: P009
+      anchor:
+        # Shift PCB into KiCAD frame
+        shift: [50, -150]
+    thumb:
+      key:
+        # Propagate any change to the default spacing
+        padding: ky
+        spread: kx
+      anchor:
+        # Anchor on zone "matrix", column "innerinner", row "mod"
+        ref: matrix_inner_mod
+        shift: [14, -12]
+      columns:
+        inner:
+          key:
+            # Rotate thumb cluster
+            splay: -20
+            height: 1.5U
+            # Puts the inner key in matrix's inner col
+            column_net: P008
+        outer:
+          key:
+            height: 1.5U
+            # Puts the outer key in a new col by itself
+            column_net: P006
+      # Puts both keys in matrix's mod row
+      rows.first.row_net: P113
 
 # PCB outlines
 outlines:
-    # Just a rectangle around the keys, for vis
-    keys:
-        - what: rectangle
-          where: true
-          size: [kx, ky]
-    # Left case - mirrored below
-    board_left:
-        - what: polygon
-          operation: stack
-          fillet: 2
-          points:
-            # Start top left, go clockwise
-            - ref: matrix_outer_top
-              shift: [-half_x_padded, half_y_padded]
-            # Go along fingers to guarantee case follows no matter what stagger values are
-            - ref: matrix_outer_top
-              shift: [half_x_antipad, half_y_padded]
-            - ref: matrix_pinky_top
-              shift: [-half_x_padded, half_y_padded]
-            - ref: matrix_pinky_top
-              shift: [half_x_antipad, half_y_padded]
-            - ref: matrix_ring_top
-              shift: [-half_x_padded, half_y_padded]
-            - ref: matrix_ring_top
-              shift: [half_x_antipad, half_y_padded]
-            - ref: matrix_middle_top
-              shift: [-half_x_padded, half_y_padded]
-            - ref: matrix_middle_top
-              shift: [half_x_padded, half_y_padded]
-            - ref: matrix_index_top
-              shift: [-half_x_antipad, half_y_padded]
-            - ref: matrix_index_top
-              shift: [half_x_padded, half_y_padded]
-            - ref: matrix_index_top
-              shift: [kx + half_x_padded, half_y_padded]
-            # Down right of matrix_inner_bottom
-            - ref: matrix_inner_bottom
-              shift: [half_x_padded, -half_y_padded - 1]
-            - ref: thumb_outer_first
-              shift: [half_x_padded, 1.5*half_y + pad]
-            - ref: thumb_outer_first
-              shift: [half_x_padded, -(1.5*half_y + pad)]
-            - ref: thumb_inner_first
-              shift: [-half_x_padded, -(1.5*half_y + pad)]
-            - ref: matrix_index_mod
-              shift: [half_x, -half_y_padded]
-            - ref: matrix_index_mod
-              shift: [-half_x_padded, -half_y_padded]
-            - ref: matrix_middle_mod
-              shift: [half_x_antipad, -half_y_padded]
-            - ref: matrix_middle_mod
-              shift: [-half_x_antipad, -half_y_padded]
-            - ref: matrix_ring_mod
-              shift: [half_x_padded, -half_y_padded]
-            - ref: matrix_ring_mod
-              shift: [-half_x_antipad, -half_y_padded]
-            - ref: matrix_pinky_mod
-              shift: [half_x_padded, -half_y_padded]
-            - ref: matrix_pinky_mod
-              shift: [-half_x_antipad, -half_y_padded]
-            - ref: matrix_outer_mod
-              shift: [half_x_padded, -half_y_padded]
-            - ref: matrix_outer_mod
-              shift: [-half_x_padded, -half_y_padded]
+  # Just a rectangle around the keys, for vis
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx, ky]
+  # Left case - mirrored below
+  board_left:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        # Start top left, go clockwise
+        - ref: matrix_outer_top
+          shift: [-half_x_padded, half_y_padded]
+        # Go along fingers to guarantee case follows no matter what stagger values are
+        - ref: matrix_outer_top
+          shift: [half_x_antipad, half_y_padded]
+        - ref: matrix_pinky_top
+          shift: [-half_x_padded, half_y_padded]
+        - ref: matrix_pinky_top
+          shift: [half_x_antipad, half_y_padded]
+        - ref: matrix_ring_top
+          shift: [-half_x_padded, half_y_padded]
+        - ref: matrix_ring_top
+          shift: [half_x_antipad, half_y_padded]
+        - ref: matrix_middle_top
+          shift: [-half_x_padded, half_y_padded]
+        - ref: matrix_middle_top
+          shift: [half_x_padded, half_y_padded]
+        - ref: matrix_index_top
+          shift: [-half_x_antipad, half_y_padded]
+        - ref: matrix_index_top
+          shift: [half_x_padded, half_y_padded]
+        - ref: matrix_index_top
+          shift: [kx + half_x_padded, half_y_padded]
+        # Down right of matrix_inner_bottom
+        - ref: matrix_inner_bottom
+          shift: [half_x_padded, -half_y_padded - 1]
+        - ref: thumb_outer_first
+          shift: [half_x_padded, 1.5*half_y + pad]
+        - ref: thumb_outer_first
+          shift: [half_x_padded, -(1.5*half_y + pad)]
+        - ref: thumb_inner_first
+          shift: [-half_x_padded, -(1.5*half_y + pad)]
+        - ref: matrix_index_mod
+          shift: [half_x, -half_y_padded]
+        - ref: matrix_index_mod
+          shift: [-half_x_padded, -half_y_padded]
+        - ref: matrix_middle_mod
+          shift: [half_x_antipad, -half_y_padded]
+        - ref: matrix_middle_mod
+          shift: [-half_x_antipad, -half_y_padded]
+        - ref: matrix_ring_mod
+          shift: [half_x_padded, -half_y_padded]
+        - ref: matrix_ring_mod
+          shift: [-half_x_antipad, -half_y_padded]
+        - ref: matrix_pinky_mod
+          shift: [half_x_padded, -half_y_padded]
+        - ref: matrix_pinky_mod
+          shift: [-half_x_antipad, -half_y_padded]
+        - ref: matrix_outer_mod
+          shift: [half_x_padded, -half_y_padded]
+        - ref: matrix_outer_mod
+          shift: [-half_x_padded, -half_y_padded]
 
-    # NOTE: to re-produce this after changes to board_left:
-    # 1) copy and replace matrix with mirror_matrix and thumb with mirror_thumb
-    # 2) comments: delete OR flip right/left, clockwise/counterclockwise, etc.
-    # 3) DON'T flip sign of x values in "shift" pairs as this is done w/ the mirror
-    board_right:
-        - what: polygon
-          operation: stack
-          fillet: 2
-          points:
-            # Start top right, go counterclockwise
-            - ref: mirror_matrix_outer_top
-              shift: [-half_x_padded, half_y_padded]
-            # Go along fingers to guarantee case follows no matter what stagger values are
-            - ref: mirror_matrix_outer_top
-              shift: [half_x_antipad, half_y_padded]
-            - ref: mirror_matrix_pinky_top
-              shift: [-half_x_padded, half_y_padded]
-            - ref: mirror_matrix_pinky_top
-              shift: [half_x_antipad, half_y_padded]
-            - ref: mirror_matrix_ring_top
-              shift: [-half_x_padded, half_y_padded]
-            - ref: mirror_matrix_ring_top
-              shift: [half_x_antipad, half_y_padded]
-            - ref: mirror_matrix_middle_top
-              shift: [-half_x_padded, half_y_padded]
-            - ref: mirror_matrix_middle_top
-              shift: [half_x_padded, half_y_padded]
-            - ref: mirror_matrix_index_top
-              shift: [-half_x_antipad, half_y_padded]
-            - ref: mirror_matrix_index_top
-              shift: [half_x_padded, half_y_padded]
-            - ref: mirror_matrix_index_top
-              shift: [kx + half_x_padded, half_y_padded]
-            # Down left of mirror_matrix_inner_bottom
-            - ref: mirror_matrix_inner_bottom
-              shift: [half_x_padded, -half_y_padded - 1]
-            - ref: mirror_thumb_outer_first
-              shift: [half_x_padded, 1.5*half_y + pad]
-            - ref: mirror_thumb_outer_first
-              shift: [half_x_padded, -(1.5*half_y + pad)]
-            - ref: mirror_thumb_inner_first
-              shift: [-half_x_padded, -(1.5*half_y + pad)]
-            - ref: mirror_matrix_index_mod
-              shift: [half_x, -half_y_padded]
-            - ref: mirror_matrix_index_mod
-              shift: [-half_x_padded, -half_y_padded]
-            - ref: mirror_matrix_middle_mod
-              shift: [half_x_antipad, -half_y_padded]
-            - ref: mirror_matrix_middle_mod
-              shift: [-half_x_antipad, -half_y_padded]
-            - ref: mirror_matrix_ring_mod
-              shift: [half_x_padded, -half_y_padded]
-            - ref: mirror_matrix_ring_mod
-              shift: [-half_x_antipad, -half_y_padded]
-            - ref: mirror_matrix_pinky_mod
-              shift: [half_x_padded, -half_y_padded]
-            - ref: mirror_matrix_pinky_mod
-              shift: [-half_x_antipad, -half_y_padded]
-            - ref: mirror_matrix_outer_mod
-              shift: [half_x_padded, -half_y_padded]
-            - ref: mirror_matrix_outer_mod
-              shift: [-half_x_padded, -half_y_padded]
-    # Combination preview showing outline and keys.
-    combo:
-        - name: board_left
-        - operation: subtract
-          name: keys
+  # NOTE: to re-produce this after changes to board_left:
+  # 1) copy and replace matrix with mirror_matrix and thumb with mirror_thumb
+  # 2) comments: delete OR flip right/left, clockwise/counterclockwise, etc.
+  # 3) DON'T flip sign of x values in "shift" pairs as this is done w/ the mirror
+  board_right:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        # Start top right, go counterclockwise
+        - ref: mirror_matrix_outer_top
+          shift: [-half_x_padded, half_y_padded]
+        # Go along fingers to guarantee case follows no matter what stagger values are
+        - ref: mirror_matrix_outer_top
+          shift: [half_x_antipad, half_y_padded]
+        - ref: mirror_matrix_pinky_top
+          shift: [-half_x_padded, half_y_padded]
+        - ref: mirror_matrix_pinky_top
+          shift: [half_x_antipad, half_y_padded]
+        - ref: mirror_matrix_ring_top
+          shift: [-half_x_padded, half_y_padded]
+        - ref: mirror_matrix_ring_top
+          shift: [half_x_antipad, half_y_padded]
+        - ref: mirror_matrix_middle_top
+          shift: [-half_x_padded, half_y_padded]
+        - ref: mirror_matrix_middle_top
+          shift: [half_x_padded, half_y_padded]
+        - ref: mirror_matrix_index_top
+          shift: [-half_x_antipad, half_y_padded]
+        - ref: mirror_matrix_index_top
+          shift: [half_x_padded, half_y_padded]
+        - ref: mirror_matrix_index_top
+          shift: [kx + half_x_padded, half_y_padded]
+        # Down left of mirror_matrix_inner_bottom
+        - ref: mirror_matrix_inner_bottom
+          shift: [half_x_padded, -half_y_padded - 1]
+        - ref: mirror_thumb_outer_first
+          shift: [half_x_padded, 1.5*half_y + pad]
+        - ref: mirror_thumb_outer_first
+          shift: [half_x_padded, -(1.5*half_y + pad)]
+        - ref: mirror_thumb_inner_first
+          shift: [-half_x_padded, -(1.5*half_y + pad)]
+        - ref: mirror_matrix_index_mod
+          shift: [half_x, -half_y_padded]
+        - ref: mirror_matrix_index_mod
+          shift: [-half_x_padded, -half_y_padded]
+        - ref: mirror_matrix_middle_mod
+          shift: [half_x_antipad, -half_y_padded]
+        - ref: mirror_matrix_middle_mod
+          shift: [-half_x_antipad, -half_y_padded]
+        - ref: mirror_matrix_ring_mod
+          shift: [half_x_padded, -half_y_padded]
+        - ref: mirror_matrix_ring_mod
+          shift: [-half_x_antipad, -half_y_padded]
+        - ref: mirror_matrix_pinky_mod
+          shift: [half_x_padded, -half_y_padded]
+        - ref: mirror_matrix_pinky_mod
+          shift: [-half_x_antipad, -half_y_padded]
+        - ref: mirror_matrix_outer_mod
+          shift: [half_x_padded, -half_y_padded]
+        - ref: mirror_matrix_outer_mod
+          shift: [-half_x_padded, -half_y_padded]
+  # Combination preview showing outline and keys.
+  combo:
+    - name: board_left
+    - operation: subtract
+      name: keys
 
 pcbs:
-    left:
-        outlines:
-            main:
-                outline: board_left
-        footprints:
-            # Keys
-            mx_hotswap:
-                what: mx
-                where: /^(thumb|matrix)_.*/
-                params:
-                    keycaps: true
-                    reverse: false
-                    hotswap: true
-                    from: "{{column_net}}"
-                    to: "{{colrow}}"
-                adjust:
-                    rotate: 180
-            # Controller
-            nice_nano:
-                what: nice_nano
-                params.orientation: up
-                where:
-                    ref: matrix_inner_top
-                    rotate: -180
-                    # usb-c connector is 6.65mm deep, so line it up on the edge of the board to stick out only a little
-                    # standard usb-c connector sticks out by about 1/16in. or 1.59mm from the nice!nano
-                    # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
-                    # should end up about .5mm inside of the PCB outline. 
-                    # Make sure in kicad that the port ends up just inside the edge of the PCB
-                    shift: [-7.8, -1]
-            # ----- Diodes -----
-            diode_main:
-                what: diode
-                # Standard diodes on all except those listed in the nested parens
-                where:
-                    - /^matrix_(?!(?:index_top)).*/
-                    - /^thumb_*/
-                params:
-                    from: "{{colrow}}"
-                    to: "{{row_net}}"
-                adjust:
-                    shift: [-1.9, 4]
-            diode_nice_nano_1:
-                what: diode
-                where: matrix_index_top
-                params:
-                    from: "{{colrow}}"
-                    to: "{{row_net}}"
-                adjust:
-                    shift: [-1.9, 7.2]
-            # Battery jack
-            # Used this battery: https://www.amazon.com/dp/B09726K2LC which is approx 2.28*1.42*0.24 inches
-            # There's a short cable on top of that for flexibility
-            jstph:
-                what: jstph
-                where:
-                    ref: matrix_middle_bottom
-                    shift: [0, 9]
-                    rotate: 90
-                params:
-                    side: B
-                    pos: pos
-                    neg: GND
-            # Reset switch (horizontal community version)
-            horizontal_reset:
-                what: EVQPUC
-                params: 
-                    side: B
-                    from: GND
-                    to: RST 
-                where:
-                    ref: matrix_inner_home
-                    # Make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
-                    shift: [9.8, 4.3]
-                    rotate: -90.0
-            # Battery on/off switch
-            battery_switch:
-                what: slider
-                where:
-                    ref: matrix_inner_bottom
-                    # Make sure in kicad that the edge ends up about 1.3mm off the edge of the board (for case)
-                    shift: [9, 7]
-                    rotate: -90
-                params:
-                    side: B
-                    from: pos
-                    to: RAW
-            # Mounting holes
-            hole_bottom_right:
-                what: mountinghole
-                where:
-                    ref: matrix_index_bottom
-                    shift: [-half_x, -half_y]
-            hole_bottom_left:
-                what: mountinghole
-                where:
-                    ref: matrix_outer_bottom
-                    shift: [half_x, -half_y]
-            hole_top_left:
-                what: mountinghole
-                where:
-                    ref: matrix_outer_top
-                    shift: [half_x, -half_y]
-            hole_top_right:
-                what: mountinghole
-                where:
-                    ref: matrix_middle_top
-                    shift: [half_x - 1.595, -half_y]
-            hole_middle_bottom:
-                what: mountinghole
-                where:
-                    ref: matrix_ring_home
-                    shift: [half_x, -half_y]
-    right:
-        outlines:
-            main:
-                outline: board_right
-        footprints:
-            # Keys
-            mx_hotswap:
-                what: mx
-                where: /^(mirror_thumb|mirror_matrix)_.*/
-                params:
-                    keycaps: true
-                    reverse: false
-                    hotswap: true
-                    from: "{{column_net}}"
-                    to: "{{colrow}}"
-                adjust:
-                    rotate: 180
-            # Controller
-            nice_nano:
-                what: nice_nano
-                params.orientation: up
-                where:
-                    ref: mirror_matrix_inner_top
-                    # usb-c connector is 6.65mm deep, so line it up on the edge of the board to stick out only a little
-                    # standard usb-c connector sticks out by about 1/16in. or 1.59mm from the nice!nano
-                    # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
-                    # should end up about .5mm inside of the PCB outline. 
-                    # Make sure in kicad that the port ends up just inside the edge of the PCB
-                    shift: [-7.8, -1]
-            # ----- Diodes -----
-            diode_main:
-                what: diode
-                # Standard diodes on all except those listed in the nested parens
-                where:
-                    - /^mirror_matrix_(?!(?:index_top)).*/
-                    - /^mirror_thumb_*/
-                params:
-                    from: "{{colrow}}"
-                    to: "{{row_net}}"
-                adjust:
-                    shift: [-1.9, 4]
-            diode_nice_nano_1:
-                what: diode
-                where: mirror_matrix_index_top
-                params:
-                    from: "{{colrow}}"
-                    to: "{{row_net}}"
-                adjust:
-                    shift: [-1.9, 7.2]
-            # Battery jack
-            # Used this battery: https://www.amazon.com/dp/B09726K2LC which is approx 2.28*1.42*0.24 inches
-            # There's a short cable on top of that for flexibility
-            jstph:
-                what: jstph
-                where:
-                    ref: mirror_matrix_middle_bottom
-                    shift: [0, 9]
-                    rotate: 90
-                params:
-                    side: B
-                    pos: pos
-                    neg: GND
-            # Reset switch (horizontal community version)
-            horizontal_reset:
-                what: EVQPUC
-                params: 
-                    side: B
-                    from: GND
-                    to: RST 
-                where:
-                    ref: mirror_matrix_inner_home
-                    # Make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
-                    shift: [9.8, 4.3]
-                    rotate: -90.0
-            # Battery on/off switch
-            battery_switch:
-                what: slider
-                where:
-                    ref: mirror_matrix_inner_bottom
-                    # Make sure in kicad that the edge ends up about 1.3mm off the edge of the board (for case)
-                    shift: [9, 7]
-                    rotate: -90
-                params:
-                    side: B
-                    from: pos
-                    to: RAW
-            # Mounting holes
-            hole_bottom_right:
-                what: mountinghole
-                where:
-                    ref: mirror_matrix_index_bottom
-                    shift: [-half_x, -half_y]
-            hole_bottom_left:
-                what: mountinghole
-                where:
-                    ref: mirror_matrix_outer_bottom
-                    shift: [half_x, -half_y]
-            hole_top_left:
-                what: mountinghole
-                where:
-                    ref: mirror_matrix_outer_top
-                    shift: [half_x, -half_y]
-            hole_top_right:
-                what: mountinghole
-                where:
-                    ref: mirror_matrix_middle_top
-                    shift: [half_x - 1.595, -half_y]
-            hole_middle_bottom:
-                what: mountinghole
-                where:
-                    ref: mirror_matrix_ring_home
-                    shift: [half_x, -half_y]
+  left:
+    outlines:
+      main:
+        outline: board_left
+    footprints:
+      # Keys
+      mx_hotswap:
+        what: mx
+        where: /^(thumb|matrix)_.*/
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+        adjust:
+          rotate: 180
+      # Controller
+      nice_nano:
+        what: nice_nano
+        params.orientation: up
+        where:
+          ref: matrix_inner_top
+          rotate: -180
+          # usb-c connector is 6.65mm deep, so line it up on the edge of the board to stick out only a little
+          # standard usb-c connector sticks out by about 1/16in. or 1.59mm from the nice!nano
+          # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
+          # should end up about .5mm inside of the PCB outline.
+          # Make sure in kicad that the port ends up just inside the edge of the PCB
+          shift: [-7.8, -1]
+      # ----- Diodes -----
+      diode_main:
+        what: diode
+        # Standard diodes on all except those listed in the nested parens
+        where:
+          - /^matrix_(?!(?:index_top)).*/
+          - /^thumb_*/
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [-1.9, 4]
+      diode_nice_nano_1:
+        what: diode
+        where: matrix_index_top
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [-1.9, 7.2]
+      # Battery jack
+      # Used this battery: https://www.amazon.com/dp/B09726K2LC which is approx 2.28*1.42*0.24 inches
+      # There's a short cable on top of that for flexibility
+      jstph:
+        what: jstph
+        where:
+          ref: matrix_middle_bottom
+          shift: [0, 9]
+          rotate: 90
+        params:
+          side: B
+          pos: pos
+          neg: GND
+      # Reset switch (horizontal community version)
+      horizontal_reset:
+        what: EVQPUC
+        params:
+          side: B
+          from: GND
+          to: RST
+        where:
+          ref: matrix_inner_home
+          # Make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
+          shift: [9.8, 4.3]
+          rotate: -90.0
+      # Battery on/off switch
+      battery_switch:
+        what: slider
+        where:
+          ref: matrix_inner_bottom
+          # Make sure in kicad that the edge ends up about 1.3mm off the edge of the board (for case)
+          shift: [9, 7]
+          rotate: -90
+        params:
+          side: B
+          from: pos
+          to: RAW
+      # Mounting holes
+      hole_bottom_right:
+        what: mountinghole
+        where:
+          ref: matrix_index_bottom
+          shift: [-half_x, -half_y]
+      hole_bottom_left:
+        what: mountinghole
+        where:
+          ref: matrix_outer_bottom
+          shift: [half_x, -half_y]
+      hole_top_left:
+        what: mountinghole
+        where:
+          ref: matrix_outer_top
+          shift: [half_x, -half_y]
+      hole_top_right:
+        what: mountinghole
+        where:
+          ref: matrix_middle_top
+          shift: [half_x - 1.595, -half_y]
+      hole_middle_bottom:
+        what: mountinghole
+        where:
+          ref: matrix_ring_home
+          shift: [half_x, -half_y]
+  right:
+    outlines:
+      main:
+        outline: board_right
+    footprints:
+      # Keys
+      mx_hotswap:
+        what: mx
+        where: /^(mirror_thumb|mirror_matrix)_.*/
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+        adjust:
+          rotate: 180
+      # Controller
+      nice_nano:
+        what: nice_nano
+        params.orientation: up
+        where:
+          ref: mirror_matrix_inner_top
+          # usb-c connector is 6.65mm deep, so line it up on the edge of the board to stick out only a little
+          # standard usb-c connector sticks out by about 1/16in. or 1.59mm from the nice!nano
+          # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
+          # should end up about .5mm inside of the PCB outline.
+          # Make sure in kicad that the port ends up just inside the edge of the PCB
+          shift: [-7.8, -1]
+      # ----- Diodes -----
+      diode_main:
+        what: diode
+        # Standard diodes on all except those listed in the nested parens
+        where:
+          - /^mirror_matrix_(?!(?:index_top)).*/
+          - /^mirror_thumb_*/
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [-1.9, 4]
+      diode_nice_nano_1:
+        what: diode
+        where: mirror_matrix_index_top
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [-1.9, 7.2]
+      # Battery jack
+      # Used this battery: https://www.amazon.com/dp/B09726K2LC which is approx 2.28*1.42*0.24 inches
+      # There's a short cable on top of that for flexibility
+      jstph:
+        what: jstph
+        where:
+          ref: mirror_matrix_middle_bottom
+          shift: [0, 9]
+          rotate: 90
+        params:
+          side: B
+          pos: pos
+          neg: GND
+      # Reset switch (horizontal community version)
+      horizontal_reset:
+        what: EVQPUC
+        params:
+          side: B
+          from: GND
+          to: RST
+        where:
+          ref: mirror_matrix_inner_home
+          # Make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
+          shift: [9.8, 4.3]
+          rotate: -90.0
+      # Battery on/off switch
+      battery_switch:
+        what: slider
+        where:
+          ref: mirror_matrix_inner_bottom
+          # Make sure in kicad that the edge ends up about 1.3mm off the edge of the board (for case)
+          shift: [9, 7]
+          rotate: -90
+        params:
+          side: B
+          from: pos
+          to: RAW
+      # Mounting holes
+      hole_bottom_right:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_index_bottom
+          shift: [-half_x, -half_y]
+      hole_bottom_left:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_outer_bottom
+          shift: [half_x, -half_y]
+      hole_top_left:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_outer_top
+          shift: [half_x, -half_y]
+      hole_top_right:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_middle_top
+          shift: [half_x - 1.595, -half_y]
+      hole_middle_bottom:
+        what: mountinghole
+        where:
+          ref: mirror_matrix_ring_home
+          shift: [half_x, -half_y]
