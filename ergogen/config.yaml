@@ -1,7 +1,6 @@
 # Units for easy adjustability
 units:
     # Proxy spacing variables
-    # TODO: use uppercase U for slightly bigger?
     kx: U + 1
     ky: U + 1
 
@@ -62,13 +61,11 @@ points:
             anchor:
                 # Anchor on zone "matrix", column "innerinner", row "mod"
                 ref: matrix_inner_mod
-                # TODO: consider this carefully
                 shift: [14, -12]
             columns:
                 inner:
                     key:
                         # Rotate thumb cluster
-                        # TODO: consider this carefully
                         splay: -20
                         height: 1.5U
                         # Puts the inner key in matrix's inner col 
@@ -122,13 +119,10 @@ outlines:
             - ref: matrix_inner_bottom
               shift: [half_x_padded, -half_y_padded - 1]
             - ref: thumb_outer_first
-              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [half_x_padded, 1.5*half_y + pad]
             - ref: thumb_outer_first
-              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [half_x_padded, -(1.5*half_y + pad)]
             - ref: thumb_inner_first
-              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [-half_x_padded, -(1.5*half_y + pad)]
             - ref: matrix_index_mod
               shift: [half_x, -half_y_padded]
@@ -188,13 +182,10 @@ outlines:
             - ref: mirror_matrix_inner_bottom
               shift: [half_x_padded, -half_y_padded - 1]
             - ref: mirror_thumb_outer_first
-              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [half_x_padded, 1.5*half_y + pad]
             - ref: mirror_thumb_outer_first
-              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [half_x_padded, -(1.5*half_y + pad)]
             - ref: mirror_thumb_inner_first
-              # TODO: change to use half_y_padded if thumb goes back to normal-sized key
               shift: [-half_x_padded, -(1.5*half_y + pad)]
             - ref: mirror_matrix_index_mod
               shift: [half_x, -half_y_padded]
@@ -256,7 +247,6 @@ pcbs:
             # ----- Diodes -----
             diode_main:
                 what: diode
-                # TODO: move some diodes for special positioning/interference of mounting holes, n!n, etc.
                 # Standard diodes on all except those listed in the nested parens
                 where:
                     - /^matrix_(?!(?:index_top)).*/
@@ -369,7 +359,6 @@ pcbs:
             # ----- Diodes -----
             diode_main:
                 what: diode
-                # TODO: move some diodes for special positioning/interference of mounting holes, n!n, etc.
                 # Standard diodes on all except those listed in the nested parens
                 where:
                     - /^mirror_matrix_(?!(?:index_top)).*/
