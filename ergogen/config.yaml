@@ -12,6 +12,7 @@ units:
   half_y_padded: half_y + pad
   half_x_antipad: half_x - pad
   half_y_antipad: half_y - pad
+  caseBorder: 1.5
 
 # Layout of keyboard
 points:
@@ -85,6 +86,10 @@ outlines:
     - what: rectangle
       where: true
       size: [kx, ky]
+  key_cutouts:
+    - what: rectangle
+      where: true
+      size: [14, 14]
   # Left case - mirrored below
   board_left:
     - what: polygon
@@ -144,7 +149,6 @@ outlines:
           shift: [half_x_padded, -half_y_padded]
         - ref: matrix_outer_mod
           shift: [-half_x_padded, -half_y_padded]
-
   # NOTE: to re-produce this after changes to board_left:
   # 1) copy and replace matrix with mirror_matrix and thumb with mirror_thumb
   # 2) comments: delete OR flip right/left, clockwise/counterclockwise, etc.
@@ -207,11 +211,85 @@ outlines:
           shift: [half_x_padded, -half_y_padded]
         - ref: mirror_matrix_outer_mod
           shift: [-half_x_padded, -half_y_padded]
+  # Create a slightly larger version of board_left for the case so that it can have room to go around the PCB
+  xl_board_left:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        # Start top left, go clockwise
+        - ref: matrix_outer_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        # Go along fingers to guarantee case follows no matter what stagger values are
+        - ref: matrix_outer_top
+          shift: [half_x_antipad - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_pinky_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_pinky_top
+          shift: [half_x_antipad - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_ring_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_ring_top
+          shift: [half_x_antipad - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_middle_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_middle_top
+          shift: [half_x_padded + caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_index_top
+          shift: [-half_x_antipad + caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_index_top
+          shift: [half_x_padded + caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_index_top
+          shift: [kx + half_x_padded + caseBorder, half_y_padded + caseBorder]
+        # Down right of matrix_inner_bottom
+        - ref: matrix_inner_bottom
+          shift: [half_x_padded + caseBorder, -half_y_padded - 1 + caseBorder]
+        - ref: thumb_outer_first
+          shift: [half_x_padded + caseBorder, 1.5*half_y + caseBorder + pad]
+        - ref: thumb_outer_first
+          shift: [half_x_padded + caseBorder, -(1.5*half_y + caseBorder + pad)]
+        - ref: thumb_inner_first
+          shift: [-half_x_padded - caseBorder, -(1.5*half_y + caseBorder + pad)]
+        - ref: matrix_index_mod
+          shift: [half_x - caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_index_mod
+          shift: [-half_x_padded - caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_middle_mod
+          shift: [half_x_antipad - caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_middle_mod
+          shift: [-half_x_antipad + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_ring_mod
+          shift: [half_x_padded + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_ring_mod
+          shift: [-half_x_antipad + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_pinky_mod
+          shift: [half_x_padded + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_pinky_mod
+          shift: [-half_x_antipad + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_outer_mod
+          shift: [half_x_padded + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_outer_mod
+          shift: [-half_x_padded - caseBorder, -half_y_padded - caseBorder]
   # Combination preview showing outline and keys.
   combo:
     - name: board_left
     - operation: subtract
       name: keys
+  # Key cutouts (from larger board)
+  cutouts:
+    - name: xl_board_left
+    - operation: subtract
+      name: key_cutouts
+  # Just double check that the caseBorder math looks right
+  cutouts_doublecheck:
+    - name: board_left
+    - operation: subtract
+      name: key_cutouts
+
+cases:
+  plate:
+    - name: key_cutouts
+      extrude: 1.2
 
 pcbs:
   left:
