@@ -86,7 +86,7 @@ outlines:
     - what: rectangle
       where: true
       size: [kx, ky]
-  key_cutouts:
+  key_holes:
     - what: rectangle
       where: true
       size: [14, 14]
@@ -270,6 +270,57 @@ outlines:
           shift: [half_x_padded + caseBorder, -half_y_padded - caseBorder]
         - ref: matrix_outer_mod
           shift: [-half_x_padded - caseBorder, -half_y_padded - caseBorder]
+  # xl_board_left, but the bottom edge is smooth rather than following the keys closely
+  xl_board_left_simple:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        # Start top left, go clockwise
+        - ref: matrix_outer_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        # Go along fingers to guarantee case follows no matter what stagger values are
+        - ref: matrix_outer_top
+          shift: [half_x_antipad - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_pinky_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_pinky_top
+          shift: [half_x_antipad - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_ring_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_ring_top
+          shift: [half_x_antipad - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_middle_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_middle_top
+          shift: [half_x_padded + caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_index_top
+          shift: [-half_x_antipad + caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_index_top
+          shift: [half_x_padded + caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_index_top
+          shift: [kx + half_x_padded + caseBorder, half_y_padded + caseBorder]
+        # Down right of matrix_inner_bottom
+        - ref: matrix_inner_bottom
+          shift: [half_x_padded + caseBorder, -half_y_padded - 1 + caseBorder]
+        - ref: thumb_outer_first
+          shift: [half_x_padded + caseBorder, 1.5*half_y + caseBorder + pad]
+        - ref: thumb_outer_first
+          shift: [half_x_padded + caseBorder, -(1.5*half_y + caseBorder + pad)]
+        - ref: thumb_inner_first
+          shift: [-half_x_padded - caseBorder, -(1.5*half_y + caseBorder + pad)]
+        - ref: matrix_index_mod
+          shift: [half_x - caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_index_mod # Actually under ring (-2kx), just use index col for y-leveling (straight bottom)
+          shift: [-half_x_antipad + caseBorder - 2kx, -half_y_padded - caseBorder]
+        - ref: matrix_pinky_mod
+          shift: [half_x_padded + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_pinky_mod
+          shift: [-half_x_antipad + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_outer_mod
+          shift: [half_x_padded + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_outer_mod
+          shift: [-half_x_padded - caseBorder, -half_y_padded - caseBorder]
   # Combination preview showing outline and keys.
   combo:
     - name: board_left
@@ -279,16 +330,23 @@ outlines:
   cutouts:
     - name: xl_board_left
     - operation: subtract
-      name: key_cutouts
+      name: key_holes
+  cutouts_simple:
+    - name: xl_board_left_simple
+    - operation: subtract
+      name: key_holes
   # Just double check that the caseBorder math looks right
-  cutouts_doublecheck:
+  cutouts_non_xl:
     - name: board_left
     - operation: subtract
-      name: key_cutouts
+      name: key_holes
 
 cases:
   plate:
-    - name: key_cutouts
+    - name: cutouts
+      extrude: 1.2
+  plate_simple:
+    - name: cutouts_simple
       extrude: 1.2
 
 pcbs:
