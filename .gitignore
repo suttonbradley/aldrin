@@ -1,11 +1,13 @@
 # Ignore except explicitly-listed
 /*
 
+!.github
 !.gitignore
+!artwork
 !ergogen
 !ergogen-output
 !README.md
-!artwork
+!zmk-config
 
 # Re-ignore
 **/*.zip
