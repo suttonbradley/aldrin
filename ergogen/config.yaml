@@ -5,7 +5,7 @@ units:
   ky: u
 
   # Padding variables
-  pad: 2
+  pad: 1.5
   half_x: (kx / 2)
   half_y: (ky / 2)
   half_x_padded: half_x + pad
@@ -60,14 +60,13 @@ points:
         padding: ky
         spread: kx
       anchor:
-        # Anchor on zone "matrix", column "innerinner", row "mod"
         ref: matrix_inner_mod
-        shift: [14, -12]
+        shift: [11, -9]
       columns:
         inner:
           key:
             # Rotate thumb cluster
-            splay: -45
+            splay: -40
             height: 1.5U
             # Puts the inner key in matrix's inner col
             column_net: P008
@@ -122,15 +121,15 @@ outlines:
           shift: [kx + half_x_padded, half_y_padded]
         # Down right of matrix_inner_bottom
         - ref: matrix_inner_bottom
-          shift: [half_x_padded, -half_y_padded - 1]
+          shift: [half_x_padded, -half_y_padded - 2.5]
         - ref: thumb_outer_first
-          shift: [half_x_padded, 1.5*half_y + pad]
+          shift: [half_x_padded, half_y + pad]
         - ref: thumb_outer_first
-          shift: [half_x_padded, -(1.5*half_y + pad)]
+          shift: [half_x_padded, -(half_y + pad)]
         - ref: thumb_inner_first
-          shift: [-half_x_padded, -(1.5*half_y + pad)]
+          shift: [-half_x_padded, -(half_y + pad)]
         - ref: matrix_index_mod
-          shift: [half_x, -half_y_padded]
+          shift: [half_x + pad, -half_y_padded]
         - ref: matrix_index_mod
           shift: [-half_x_padded, -half_y_padded]
         - ref: matrix_middle_mod
@@ -158,7 +157,7 @@ outlines:
       operation: stack
       fillet: 2
       points:
-        # Start top right, go counterclockwise
+        # Start top left, go clockwise
         - ref: mirror_matrix_outer_top
           shift: [-half_x_padded, half_y_padded]
         # Go along fingers to guarantee case follows no matter what stagger values are
@@ -184,15 +183,15 @@ outlines:
           shift: [kx + half_x_padded, half_y_padded]
         # Down left of mirror_matrix_inner_bottom
         - ref: mirror_matrix_inner_bottom
-          shift: [half_x_padded, -half_y_padded - 1]
+          shift: [half_x_padded, -half_y_padded - 2.5]
         - ref: mirror_thumb_outer_first
-          shift: [half_x_padded, 1.5*half_y + pad]
+          shift: [half_x_padded, half_y + pad]
         - ref: mirror_thumb_outer_first
-          shift: [half_x_padded, -(1.5*half_y + pad)]
+          shift: [half_x_padded, -(half_y + pad)]
         - ref: mirror_thumb_inner_first
-          shift: [-half_x_padded, -(1.5*half_y + pad)]
+          shift: [-half_x_padded, -(half_y + pad)]
         - ref: mirror_matrix_index_mod
-          shift: [half_x, -half_y_padded]
+          shift: [half_x + pad, -half_y_padded]
         - ref: mirror_matrix_index_mod
           shift: [-half_x_padded, -half_y_padded]
         - ref: mirror_matrix_middle_mod
