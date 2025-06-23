@@ -93,7 +93,7 @@ outlines:
   board_left:
     - what: polygon
       operation: stack
-      fillet: 2
+      fillet: 1
       points:
         # Start top left, go clockwise
         - ref: matrix_outer_top
@@ -123,13 +123,13 @@ outlines:
         - ref: matrix_inner_bottom
           shift: [half_x_padded, -half_y_padded - 2.5]
         - ref: thumb_outer_first
-          shift: [half_x_padded, half_y + pad]
+          shift: [half_x_padded, half_y_padded]
         - ref: thumb_outer_first
-          shift: [half_x_padded, -(half_y + pad)]
+          shift: [half_x_padded, -half_y_padded)]
         - ref: thumb_inner_first
-          shift: [-half_x_padded, -(half_y + pad)]
+          shift: [-half_x_padded, -half_y_padded]
         - ref: matrix_index_mod
-          shift: [half_x + pad, -half_y_padded]
+          shift: [half_x_padded, -half_y_padded]
         - ref: matrix_index_mod
           shift: [-half_x_padded, -half_y_padded]
         - ref: matrix_middle_mod
@@ -155,7 +155,7 @@ outlines:
   board_right:
     - what: polygon
       operation: stack
-      fillet: 2
+      fillet: 1
       points:
         # Start top left, go clockwise
         - ref: mirror_matrix_outer_top
@@ -185,13 +185,13 @@ outlines:
         - ref: mirror_matrix_inner_bottom
           shift: [half_x_padded, -half_y_padded - 2.5]
         - ref: mirror_thumb_outer_first
-          shift: [half_x_padded, half_y + pad]
+          shift: [half_x_padded, half_y_padded]
         - ref: mirror_thumb_outer_first
-          shift: [half_x_padded, -(half_y + pad)]
+          shift: [half_x_padded, -half_y_padded)]
         - ref: mirror_thumb_inner_first
-          shift: [-half_x_padded, -(half_y + pad)]
+          shift: [-half_x_padded, -half_y_padded)]
         - ref: mirror_matrix_index_mod
-          shift: [half_x + pad, -half_y_padded]
+          shift: [half_x_padded, -half_y_padded]
         - ref: mirror_matrix_index_mod
           shift: [-half_x_padded, -half_y_padded]
         - ref: mirror_matrix_middle_mod
