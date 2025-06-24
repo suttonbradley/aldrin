@@ -125,7 +125,7 @@ outlines:
         - ref: thumb_outer_first
           shift: [half_x_padded, half_y_padded]
         - ref: thumb_outer_first
-          shift: [half_x_padded, -half_y_padded)]
+          shift: [half_x_padded, -half_y_padded]
         - ref: thumb_inner_first
           shift: [-half_x_padded, -half_y_padded]
         - ref: matrix_index_mod
@@ -187,9 +187,9 @@ outlines:
         - ref: mirror_thumb_outer_first
           shift: [half_x_padded, half_y_padded]
         - ref: mirror_thumb_outer_first
-          shift: [half_x_padded, -half_y_padded)]
+          shift: [half_x_padded, -half_y_padded]
         - ref: mirror_thumb_inner_first
-          shift: [-half_x_padded, -half_y_padded)]
+          shift: [-half_x_padded, -half_y_padded]
         - ref: mirror_matrix_index_mod
           shift: [half_x_padded, -half_y_padded]
         - ref: mirror_matrix_index_mod
@@ -210,18 +210,71 @@ outlines:
           shift: [half_x_padded, -half_y_padded]
         - ref: mirror_matrix_outer_mod
           shift: [-half_x_padded, -half_y_padded]
+  xl_board_left_simple:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        # Start top left, go clockwise
+        - ref: matrix_outer_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        # Go along fingers to guarantee case follows no matter what stagger values are
+        - ref: matrix_outer_top
+          shift: [half_x_antipad - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_pinky_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_pinky_top
+          shift: [half_x_antipad - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_ring_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_ring_top
+          shift: [half_x_antipad - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_middle_top
+          shift: [-half_x_padded - caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_middle_top
+          shift: [half_x_padded + caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_index_top
+          shift: [-half_x_antipad + caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_index_top
+          shift: [half_x_padded + caseBorder, half_y_padded + caseBorder]
+        - ref: matrix_index_top
+          shift: [kx + half_x_padded + caseBorder, half_y_padded + caseBorder]
+        # Down right of matrix_inner_bottom
+        - ref: matrix_inner_bottom
+          shift: [half_x_padded + caseBorder, -half_y_padded - 2.5 + caseBorder]
+        - ref: thumb_outer_first
+          shift: [half_x_padded + caseBorder, half_y_padded + caseBorder]
+        - ref: thumb_outer_first
+          shift: [half_x_padded + caseBorder, -half_y_padded - caseBorder]
+        - ref: thumb_inner_first
+          shift: [-half_x_padded - caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_index_mod
+          shift: [half_x - caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_index_mod # Actually under ring (-2kx), just use index col for y-leveling (straight bottom)
+          shift: [-half_x_antipad + caseBorder - 2kx, -half_y_padded - caseBorder]
+        - ref: matrix_pinky_mod
+          shift: [half_x_padded + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_pinky_mod
+          shift: [-half_x_antipad + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_outer_mod
+          shift: [half_x_padded + caseBorder, -half_y_padded - caseBorder]
+        - ref: matrix_outer_mod
+          shift: [-half_x_padded - caseBorder, -half_y_padded - caseBorder]
   # Combination preview showing outline and keys.
   combo:
     - name: board_left
     - operation: subtract
       name: keys
 
+  # Key cutouts (from larger board)
+  cutouts:
+    - name: xl_board_left_simple
+    - operation: subtract
+      name: key_holes
+
 cases:
   plate:
     - name: cutouts
-      extrude: 1.2
-  plate_simple:
-    - name: cutouts_simple
       extrude: 1.2
 
 pcbs:
@@ -254,7 +307,8 @@ pcbs:
           # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
           # should end up about .5mm inside of the PCB outline.
           # Make sure in kicad that the port ends up just inside the edge of the PCB
-          shift: [-7.8, -1]
+          # NOTE: This was tough to plug in on v1 - adjusted here
+          shift: [-7.3, -1]
       # ----- Diodes -----
       diode_main:
         what: diode
@@ -282,7 +336,7 @@ pcbs:
         what: jstph
         where:
           ref: matrix_middle_bottom
-          shift: [0, 9]
+          shift: [3, 9]
           rotate: 90
         params:
           side: B
@@ -298,7 +352,7 @@ pcbs:
         where:
           ref: matrix_inner_home
           # Make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
-          shift: [9.8, 4.3]
+          shift: [9.3, 4.3]
           rotate: -90.0
       # Battery on/off switch
       battery_switch:
@@ -306,7 +360,7 @@ pcbs:
         where:
           ref: matrix_inner_bottom
           # Make sure in kicad that the edge ends up about 1.3mm off the edge of the board (for case)
-          shift: [9, 7]
+          shift: [8.7, 7]
           rotate: -90
         params:
           side: B
@@ -366,7 +420,8 @@ pcbs:
           # case thickness will be around 1.2mm per Caldera recommendation, meaning nice!nano usb-c port render
           # should end up about .5mm inside of the PCB outline.
           # Make sure in kicad that the port ends up just inside the edge of the PCB
-          shift: [-7.8, -1]
+          # NOTE: This was tough to plug in on v1 - adjusted here
+          shift: [-7.3, -1]
       # ----- Diodes -----
       diode_main:
         what: diode
@@ -394,7 +449,7 @@ pcbs:
         what: jstph
         where:
           ref: mirror_matrix_middle_bottom
-          shift: [0, 9]
+          shift: [3, 9]
           rotate: 90
         params:
           side: B
@@ -410,7 +465,7 @@ pcbs:
         where:
           ref: mirror_matrix_inner_home
           # Make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
-          shift: [9.8, 4.3]
+          shift: [9.5, 4.3]
           rotate: -90.0
       # Battery on/off switch
       battery_switch:
@@ -418,7 +473,7 @@ pcbs:
         where:
           ref: mirror_matrix_inner_bottom
           # Make sure in kicad that the edge ends up about 1.3mm off the edge of the board (for case)
-          shift: [9, 7]
+          shift: [8.7, 7]
           rotate: -90
         params:
           side: B
