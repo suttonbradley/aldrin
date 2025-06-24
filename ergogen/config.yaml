@@ -465,7 +465,7 @@ pcbs:
         where:
           ref: mirror_matrix_inner_home
           # Make sure in kicad that the edge of the reset button render ends up ~.5mm outside of the PCB
-          shift: [9.5, 4.3]
+          shift: [9.3, 4.3]
           rotate: -90.0
       # Battery on/off switch
       battery_switch:
