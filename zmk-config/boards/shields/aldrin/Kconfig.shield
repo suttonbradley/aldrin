@@ -1,0 +1,5 @@
+config SHIELD_ALDRIN_LEFT
+    def_bool $(shields_list_contains,aldrin_left)
+
+config SHIELD_ALDRIN_RIGHT
+    def_bool $(shields_list_contains,aldrin_right)
